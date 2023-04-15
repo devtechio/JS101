@@ -142,3 +142,176 @@ if (num < 10) { // same as `if ((num < 10) === true)`
 }
 ```
 
+A function doesn't usually return `true` or `false` explicitly either, it usually returns the result of a conditional expression.
+
+```js
+function isSmall(number) {
+  return number < 10;
+}
+
+let num = 15;
+
+if (isSmall(num)) {
+  console.log('small number');
+} else {
+  console.log('large number');
+}
+```
+
+The code above logs `large number` because isSmall(num) evaluates to `false` when num >= 10.
+
+## Logical Operators 
+
+Logical operators evaluate an expression that involves two subexpressions, then return a value that evaluates as `true` or `false`.
+
+### The `&&` Operator 
+
+This operator evaluates as true only when both sub-expressions evaluate as true:
+
+```
+> true && true              // true
+> true && false             // false
+> false && true             // false
+> false && false            // false
+
+> let num = 5
+> (num < 10) && (num > 3)       // true
+> (num < 10) && (num > 6)       // false
+> (num > 10) && (num < 6)       // false
+> (num > 10) && (num < 3)       // false
+```
+
+```
+> let num = 5
+> (num < 10) && (num > 0) && ((num % 2) === 1)
+= true
+
+> (num < 10) && (num < 0) && ((num % 2) === 1)
+= false
+```
+
+## The `||` Operator 
+
+The **or** operator evaluates as true when either of the two sub-expressions evaluates as true.
+
+```
+> true || true              // true
+> true || false             // true
+> false || true             // true
+> false || false            // false
+
+> let num = 5
+> num < 10 || num > 3       // true
+> num < 10 || num > 6       // true
+> num > 10 || num < 6       // true
+> num > 10 || num < 3       // false
+```
+
+## Short-Circuit Operators 
+
+Both `&&` and `||` exhibit a behavior called **short-circuiting** that means JavaScript stops evaluating sub-expressions once it can determine the final value.  In the case of `&&`, JavaScript short-circuits when it realizes that the entire expression can't be true; when it encounters a false sub-expression.  With `||` , it short-circuits when it realizes that the expression can't be false; when one sub-expression is true. 
+
+`&&` short-circuits when it encounters the first sub-expression (from left-to-right) that evaluates as false: 
+
+```node
+> false && undefined.length
+= false
+```
+
+By itself `undefined.length` would raise a `TypeError` however since the left side of the `&&` guarantees that the entire expression can't be true, <mark class="hltr-red">the right side never executes.</mark>
+
+This would:
+```js
+> true && undefined.length
+TypeError: Cannot read property 'length' of undefined
+```
+
+The `||` operator short-circuits when it encounters the first `true` sub-expression (left-to-right)
+
+```node
+> true || undefined.length
+= true
+```
+
+Relying on short-circuit behavior can be dangerous but it can be handy:
+
+```js
+if (name && (name.length > 0)) {
+  console.log(`Hi, ${name}.`);
+} else {
+  console.log("Hello, whoever you are.");
+}
+```
+
+## What is truthiness? 
+
+Truthiness differs from boolean values in that JavaScript evaluates almost all values as true except : 
+* false
+* undefined
+* null
+* 0
+* ''
+* NaN
+
+So far the phrases _evaluated as true_ and _evaluated as false_ have been used but you can also use **truthy** and **falsy** to describe the nature of the values.   
+
+Truthiness means that we can use any condition or logical operator: 
+
+```js
+let num = 5;
+if (num) {
+  console.log("valid number");
+} else {
+  console.log("erro!");
+}
+```
+
+JavaScript considers any non-zero / non-NaN number to be truthy, however num it doesn't mean` num === true`
+
+The use of truthy an falsy values can sometimes lead to surprising code:
+
+```js
+let name; 
+if (name = getNameFromUser()) {
+  console.log(`Hi ${name}`);
+} else {
+  console.log("you must enter your name!");
+}
+```
+
+The safer way to write the code is : 
+
+```js
+let name = getNameFromUser();
+if (name) {
+  console.log(`Hi ${name}`);
+} else {
+  console.log("you must enter your name!");
+}
+```
+
+Make it clear that you're testing for an empty name:
+
+```js
+let name = getNameFromUser();
+if (name === '') {
+  console.log("you must enrer your name!")
+} else {
+  console.log(`Hi ${name}`);
+}
+```
+
+It can be made even better by testing for an empty name: 
+
+```js
+let name = getNameFromUser();
+if (name === "") {
+  console.log("you must enter your name!");
+} else {
+  console.log(`Hi ${name}`);
+}
+```
+
+## Walk-through: Calculator 
+
+ 
