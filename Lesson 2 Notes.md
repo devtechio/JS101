@@ -314,4 +314,200 @@ if (name === "") {
 
 ## Walk-through: Calculator 
 
- 
+ Write some code to welcome user to program:
+ ```js
+console.log('Welcome to Calculator!');
+ ```
+Ask user for first number : 
+```js
+console.log("What's the first number?");
+```
+
+As is the program will run in node but then immediately stop running without waiting for the user to give input / feedback.  This is where you use `readline-sync` and the `question` function to receive the user response:
+```js 
+const readline = require('readline-sync');
+
+console.log('Welcome to Calculator!');
+
+console.log("What's teh first number?");
+```
+
+The first line will use the built-in Node.js function `require` to look for the `readline-sync` library in the `node_modules` folder.  This will return the library in the form of an object that we can assign to the `readline` variable, whose name does not have to be `readline`, you can choose any name but it would make sense to choose a name that helps you remember what the variable contains.  
+
+By using the `question` method from  the `readline-sync` library, you can get the input from the user.
+```js
+const readline = require('readline-sync');
+
+console.log('Welcome to Calculator');
+
+console.log("What's the first number?");
+readline.question();
+```
+
+The last line, the .question() method causes the program to wait for keyboard input, it returns the input as a string when the user pressed the Return key.  Now you assign that return value of the `readline.question` to a variable:
+
+```js
+const readline = require('readline-sync');
+
+console.log('Welcome to Calculator!');
+
+console.log("What's the first number?");
+let number1 = readline.question();
+
+console.log(question1)
+```
+
+second number implementation:
+
+```js
+const readline = require('readline-sync');
+
+console.log('Welcome to Calculator!');
+
+console.log("What's the first number?");
+let number1 = readline.question();
+
+console.log("What's the second number?");
+let number2 = readline.question();
+
+console.log(`${number1} ${number2}`);
+```
+
+At this point we want to do something with these numbers, the mathematical operations. 
+
+```js
+const readline = require('readline-sync');
+
+console.log('Welcome to Calculator!');
+
+console.log("What's the first number?");
+let number1 = readline.question();
+
+console.log("What's the second number?");
+let number2 = readline.question();
+
+console.log('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide');
+
+let operation = readline.question()
+```
+
+```js
+	const readline = require('readline-sync');
+
+console.log('Welcome to Calculator!');
+
+console.log("What's the first number?");
+let number1 = readline.question();
+
+console.log("What's the second number?");
+let number2 = readline.question();
+
+console.log('What operation would you like to perform?\n1) Add 2) Subtract 3) Subtract 4) Multiply 5) Divide');
+let operation = readline.question();
+
+let output;
+if (operation === '1') { // '1' represents addition
+  output = number1 + number2;
+}
+
+console.log(`The result is: ${output}`);
+```
+
+readline.question() always returns a string
+
+```js
+const readline = require('readline-sync');
+
+console.log('Welcome to Calculator!');
+
+console.log("What's the first number?");
+let number1 = readline.question();
+
+console.log("What's the second number?");
+let number2 = readline.question();
+
+console.log('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide');
+let operation = readline.question();
+
+let output;
+if (operation === '1') { // '1' represents addition
+  output = Number(number1) + Number(number2);
+}
+
+console.log(`The result is: ${output}`);
+```
+
+```js
+const readline = require('readline-sync');
+
+console.log('Welcome to Calculator!');
+
+console.log("What's the first number?");
+let number1 = readline.question();
+
+console.log("What's the second number?");
+let number2 = readline.question();
+
+console.log('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide');
+let operation = readline.question();
+
+let output;
+if (operation === '1') { // '1' represents addition
+  output = Number(number1) + Number(number2);
+} else if (operation === '2') { // '2' represents subtraction
+  output = Number(number1) - Number(number2);
+}
+
+console.log(`The result is: ${output}`);
+```
+
+```js
+const readline = require('readline-sync');
+
+console.log('Welcome to Calculator!');
+
+console.log("What's the first number?");
+let number1 = readline.question();
+
+console.log("What's the second number?");
+let number2 = readline.question();
+
+console.log('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide');
+let operation = readline.question();
+
+let output;
+if (operation === '1') { // '1' represents addition
+  output = Number(number1) + Number(number2);
+} else if (operation === '2') { // '2' represents subtraction
+  output = Number(number1) - Number(number2);
+} else if (operation === '3') { // 3 represents multiplication
+  output = Number(number1) * Number(number2);
+} else if (operation === '4') { // 4 represents division
+  output = Number(number1) / Number(number2);
+}
+
+console.log(`The result is: ${output}`);
+```
+
+## Pseudocode
+
+When you write JavaScript, you are writing for the JS engine / interpreter to process.  If there's a syntax error, the engine will complain saying it doesn't know how to process the broken syntax.  Since code needs to be error-free, there's a rigid format when programming.  
+
+Pseudocode on the other hand is for humans, so the format is relaxed:
+
+```
+Given a collection of numbers.
+
+Iterate through the collection one by one.
+  - save the first value as the starting value.
+  - for each iteration, compare the saved value         with the current value.
+  - if the current number is greater
+    - reassign the saved value as the current value
+  - otherwise, if the current value smaller or equal
+    - move to the next value in the collection
+
+After iterating through the collection, return the saved value.
+```
+
+We don't start writing code from the beginning, but instead **load the problem into our brain** first. Only then can you start to dissect, understand, and come up with an execution path to solve a problem. 
+
