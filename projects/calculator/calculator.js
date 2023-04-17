@@ -6,19 +6,22 @@
 
 const readline = require('readline-sync');
 
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
 // welcome user to the app
-console.log("Welcome to Calculator!");
+prompt("Welcome to Calculator!");
 
 // ask user for first number
-console.log("What's the first number?");
+prompt("What's the first number?");
 
 let number1 = readline.question();
 
 
-console.log("What's the second number?");
+prompt("What's the second number?");
 let number2 = readline.question();
 
-console.log('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide');
+prompt('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide');
 let operation = readline.question();
 
 let output;

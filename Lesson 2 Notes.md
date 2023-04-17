@@ -724,4 +724,43 @@ For Launch School purposes we use the YAML configuration format since it's easie
 
 create a `.eslintrc.yml` file and place the file in your top-level projects directory or put it in each individual project directory; not both.
 
+create test file
+```bash
+touch hello.js
+```
+
+hello.js :
+```js
+console.log(helloWorld)
+```
+
+run ESLint on the file:
+```bash
+$ npx eslint hello.js
+
+/Users/applecore/Documents/launchSchool/JS101/projects/ESLint_test/hello.js
+  1:13  error  'helloWorld' is not defined  no-undef
+  1:24  error  Missing semicolon            semi
+
+✖ 2 problems (2 errors, 0 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+  ```
+
+* the first non-blank line shows the full path name of the file the ESLint checked
+* The next two lines show the two errors that the ESLint found in the code, the first involves an undefined `helloWorld` variable on line 1, column 13.  The second shows a missing semi-colon on line 1, column 24. 
+* The two error lines show the names of the rules that apply to those errors: `no-undef` and `semi` rules
+* Last two lines report some simple stats about what ESLint found: 2 separate problems, both of which it classified as errors instead of warnings, it also suggests you can fix one of the problems by running `eslint --fix hello.js --` 
+
+
+## Walk-Through: Refactoring Calculator 
+
+```js 
+const readline = require('readline-sync');
+
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
+
+// rest of program omitted
+```
 
