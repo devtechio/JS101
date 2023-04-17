@@ -2,7 +2,7 @@
 // Ask user for second number
 // Ask user for operation to perform
 // Perform the operation on two numbers
-// Print result to the terminal 
+// Print result to the terminal
 
 const readline = require('readline-sync');
 
@@ -36,4 +36,4 @@ if (operation === '1') {
   output = Number(number1) / Number(number2);
 }
 
-console.log(`The result is: ${output}`)
+console.log(`The result is: ${output}`);
