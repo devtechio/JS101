@@ -500,7 +500,7 @@ Given a collection of numbers.
 
 Iterate through the collection one by one.
   - save the first value as the starting value.
-  - for each iteration, compare the saved value         with the current value.
+  - for each iteration, compare the saved value with the current value.
   - if the current number is greater
     - reassign the saved value as the current value
   - otherwise, if the current value smaller or equal
@@ -510,4 +510,218 @@ After iterating through the collection, return the saved value.
 ```
 
 We don't start writing code from the beginning, but instead **load the problem into our brain** first. Only then can you start to dissect, understand, and come up with an execution path to solve a problem. 
+
+Two layers to solving any problem: 
+* logical problem domain layer
+* syntactical programming language layer
+
+Using pseudocode allows us to focus on the logical problem domain layer without dragging us down to the programming language layer.
+
+The issue with pseudocode is that the logic can't be verified, for that we need to translate the pseudocode to progamming code.
+
+## Formal Pseudocode
+
+![![JS101/#^Table]]
+```
+START
+
+# Given a collection of integers called "numbers"
+
+SET iterator = 1
+SET savedNumber = value within numbers collection at space 1
+
+WHILE iterator <= length of numbers
+  SET currentNumber = value within numbers collection at space "iterator"
+  IF currentNumber > savedNumber
+    savedNumber = currentNumber
+  ELSE
+    skip to the next iteration
+
+  iterator = iterator + 1
+
+PRINT savedNumber
+
+END
+```
+
+js:
+```js
+function findGreatest(numbers) {
+  let savedNumber = numbers[0];
+
+  numbers.forEach(num => {
+    if (num > savedNumber) {
+      savedNumber = num;
+    }
+  });
+
+  return savedNumber;
+}
+```
+
+For more complicated, sophisticated problems we need to take a more piecemeal approach when writing pseudocode, then translate it to JavaScript.
+
+Write pseudocode for: 
+1.   A function that returns the sum of two numbers
+```
+SET num1 = first number
+SET num2 = second number
+SET sum = num1 + num2
+PRINT sum
+```
+
+2.   A function that takes an array of strings, and returns a string that is all those strings concatenated together
+
+```
+SET emptyStr to an empty string 
+SET iterator to 1
+
+WHILE iterator <= length of array of strings
+  += current string to emptyStr
+  iterator = iterator + 1
+
+PRINT emptyStr
+```
+
+You don't need to use pseudocode for every bit of code written, especially once we're down to the function level, however, it's a good idea to always use it here in this course and the associated Small Problem exercises.  It helps with overcoming problems in the short term, and prepare for interview assessments later on. 
+
+## Flowchart
+
+By using a flowchart we map out the logical sequence of possible solutions in visual way.  
+
+![[Pasted image 20230416165006.png]] 
+
+Using a flowchart approach to finding the largest number in a collection : 
+
+![[Pasted image 20230416165149.png]] 
+
+ The decision component (the diamond) should only have two branches, if you have more you should use separate diamonds for each branch.  
+
+Arrows show logical 'flow' to specify the iteration logic.   
+
+Step-by-step logic the program needs to solve the problem = imperative or procedural way to solve.
+
+### A Larger Problem
+
+We need to ask the user to enter N collections of numbers that we want to find and display the largest number from each collection. 
+
+```
+while the user wants to keep going 
+   - ask the user for a collection of numbers
+   - extract the largest one from that collection and save it 
+   - ask the user if they ant to input another collection 
+
+return the saved list of numbers
+```
+
+
+```
+while the user wants to keep going 
+  - ask the user for a collection of numbers
+  - iterate through the collection one at a time
+   - save the first value as the the starting value
+   - for each iteration, compare the saved value with the current value
+   - if the saved value is greater than or equal to the current number move to the next value of the colletion
+   - otherwise, if the current value is greater tahn the saved value reassign the saved value as the current value
+
+ - after iterating through the collection, save the largest value into the list
+ - ask the user if they want to input another collection
+
+return the saved list of numbers
+```
+
+When pseudocode gets long, it's hard to trust the accuracy, you can only verify the logic by actual program code, so its prudent to extract a logical grouping into a sub-process and tackle the various pieces separately. 
+
+```
+START
+
+SET largeNumbers = []
+SET keepGoing = true
+
+WHILE keepGoing === true
+   GET 'enter a collection'
+   SET collection 
+   SET largest number = SUBPROCESS "extract the largest one from the collection"
+   largestNumbers.push(largestNumber)
+   GET 'enter another collection?'
+   IF 'yes'
+     keepGoing = true 
+   ELSE
+     keepGoing = false
+
+PRINT largeNumbers
+
+END
+```
+
+We have a SUBPROCESS keyword showing that something else will extract the largest number from the collection, extracting logic into sub-processes lets us focus on a well-defined, narrowly-scoped set of pseudocode.
+
+![[Pasted image 20230416213053.png]]
+
+As you begin to use pseudocode and flowcharts you start to think about how detailed the chart and words should e, and what you can extract to sub-processes.  
+
+A programmer must always think about this when designing the solution to a problem, you wont get it right the first time. 
+
+At a high level, use declarative syntax.  
+  (calculator example)
+
+```
+- GET the first number
+  - make sure it's valid, otherwise ask for another
+- GET the second nummber
+  - make sure it's valid, otherwise ask for another
+- GET the operator
+  - Make sure it's valid, otherwise, ask again
+
+- Perform the operation on the two numbers
+- Display result
+- Ask whether the user wants to do another calculation
+```
+
+Once you have the high-level steps, you can drill down a level into imperative pseudocode and outline specifics
+
+This takes practice, and you're expected to lay out logic before coding; pseudocode is the most straightforward way to do that. 
+
+### Flowcharting the Calculator 
+
+![[Pasted image 20230416220655.png]] 
+
+High level flowchart introducing three sub-processes: `numberValid`, `operatorValid`, and `findResult`; by not worrying about the low-level details of how the sub-processes will work, we can think at a higher level about our overall application logic.
+
+
+## ESLint
+
+Choosing a style guide
+* Helps write clear, consistent code that is ready to read
+* Helps make variable and function names consistent and predictable
+* Help write code that coworkers, fellow students, and Launch School staff easily read and understand
+* Helps detect and correct common JavaScript coding mistakes
+
+Airbnb JavaScript Style Guide
+https://github.com/airbnb/javascript
+
+This style guide captures many of the standard conventions that most developers use.  ESLint configuration enforces many of the styles in the Airbnb guide.
+
+ESLint is a static code analyzer for JavaScript that offers advice on style, format, coding practices, possible errors and other problems.  Using ESLint will help you adhere to the rules of your preferred style guide.  It's a modular framework that uses a pluggable architecture to insert enforcement rules.
+
+Developers call ESLint : linter.  Linters inspect code for potential errors and 'code smells', adherence to the best practices determined by developers over the years. 
+
+Linting is not foolproof, but it can serves as the first line of defense against some of the most common pitfalls in a language.   For example, the configuration we use doesn't let assignments as a conditionl expression in an `if` statement: 
+```js
+if (result = someFunction()) { // this is legal, but might be a mistake
+  ...
+}
+```
+
+ESLint is a Node package, so it's installed like any other package and it's recommended to install ESLint and all related packages locally as a development dependency
+```shell
+$ npm install eslint@7.12.1 eslint-cli babel-eslint --save-dev
+```
+
+### Configuring ESLint 
+
+For Launch School purposes we use the YAML configuration format since it's easier to read and type.
+
+create a `.eslintrc.yml` file and place the file in your top-level projects directory or put it in each individual project directory; not both.
+
 
